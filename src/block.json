@@ -1,0 +1,18 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "create-block/wp-pixel-art",
+	"version": "1.0.0",
+	"title": "Pixel Art",
+	"category": "widgets",
+	"icon": "grid-view",
+	"description": "A block to display pixel arts.",
+	"example": {},
+	"supports": {
+		"html": false
+	},
+	"textdomain": "wp-pixel-art",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

@@ -56,7 +56,7 @@ class Core extends BaseCore {
 	{
 		$this->configPage = ConfigPage::instance();
 
-		// \add_action('init', array($this, 'create_block_wp_plugin_framework_block_init'));
+		\add_action('init', array($this, 'create_block_wp_plugin_framework_block_init'));
         \add_action('rest_api_init', [Settings::instance(), 'rest_api_init']);
 		\add_action('admin_enqueue_scripts', [$this->getAssets(), 'admin_enqueue_scripts']);
 		\add_action('admin_menu', [$this->getConfigPage(), 'admin_menu']);
@@ -64,10 +64,42 @@ class Core extends BaseCore {
 	}
 
 	function create_block_wp_plugin_framework_block_init() {
-		register_block_type( PIXELART_PATH . '/public/dist', array(
+		register_block_type( PIXELART_PATH . '/build', array(
 			'render_callback' => array($this, 'theHTML')
 		  ) );
 	}
+
+    function theHTML($attributes) {
+		$pixelart_pixel_data = get_option( 'pixelart_pixel_data' );
+        $pixel_data = ($pixelart_pixel_data) ? unserialize( $pixelart_pixel_data ) : [];
+        $aspect_ratio = 320;
+        $grid_size = $aspect_ratio /16;
+        $rect = '';
+        $x = 0;
+        $y = 0;
+        for($i=0; $i<count($pixel_data); $i++){
+
+            
+            $rect .= '<rect width="'.$grid_size.'" height="'.$grid_size.'" x="'.$x.'" y="'.$y.'" fill="'.$pixel_data[$i].'" />';
+            
+            if( ($i+1)%16 === 0 ){
+                $x = 0;
+                $y += $grid_size; 
+            }else{
+                $x += $grid_size; 
+            }
+
+        }
+		$svg = '<svg width="'.$aspect_ratio.'" height="'.$aspect_ratio.'" xmlns="http://www.w3.org/2000/svg">
+        '.$rect.'
+            Sorry, your browser does not support inline SVG.  
+        </svg>';
+	
+		return sprintf(
+			'<div>%s</div>',
+			$svg
+		);
+	  }
 	
 	/**
      * Get config page.

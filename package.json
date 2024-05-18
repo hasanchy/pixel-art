@@ -1,11 +1,11 @@
 {
 	"name": "pixel-art",
 	"version": "1.0.0",
-	"description": "In this Article we will learn how to create a React App with Webpack 5.",
+	"description": "A WordPress plugin that allows users to draw and display pixel art on their website.",
 	"main": "index.js",
 	"scripts": {
-		"build": "wp-scripts build src/public/dev/admin.js",
-		"start": "wp-scripts start src/public/dev/admin.js --hot"
+		"build": "wp-scripts build src/index.js src/public/dev/admin.js",
+		"start": "wp-scripts start src/index.js src/public/dev/admin.js --hot"
 	},
 	"repository": {
 		"type": "git",

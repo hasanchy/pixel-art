@@ -1,5 +1,5 @@
 {
-    "description": "Test",
+    "description": "A WordPress plugin that allows users to draw and display pixel art on their website.",
     "license": "GPL-3.0-or-later",
     "config": {
         "sort-packages": true
