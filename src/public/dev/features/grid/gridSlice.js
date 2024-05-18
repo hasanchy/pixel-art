@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
-import appLocalizer from '../../types/global';
+// import appLocalizer from '../../types/global';
 import { message } from 'antd';
 
 // Define the initial state using that type

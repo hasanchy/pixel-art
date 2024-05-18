@@ -2,14 +2,14 @@ import { ErrorBoundary } from "react-error-boundary";
 import { Alert, Button, Card, Col, Row, Space } from 'antd';
 import Grid from "../grid/Grid";
 import ColorPicker from "../grid/ColorPicker";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { fetchPixelData, savePixelData } from "../grid/gridSlice";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-const App = (): JSX.Element => {
-	const dispatch = useAppDispatch();
+const App = () => {
+	const dispatch = useDispatch();
 
-	const { pixelData, savedPixelData, isPixelDataFetching, isPixelDataSaving, alert } = useAppSelector((state) => state.grid);
+	const { pixelData, savedPixelData, isPixelDataFetching, isPixelDataSaving, alert } = useSelector((state) => state.grid);
 	const buttonDisabled = (isPixelDataFetching || JSON.stringify(pixelData) === JSON.stringify(savedPixelData)) ? true : false;
 
 	useEffect(() => {

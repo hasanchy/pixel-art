@@ -1,10 +1,10 @@
 import React from 'react';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { setIsMouseDown, setPixels } from './gridSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 const GridItems = (props) => {
-    const {pixelData, isMouseDown, selectedColor } = useAppSelector((state) => state.grid);
-    const dispatch = useAppDispatch();
+    const {pixelData, isMouseDown, selectedColor } = useSelector((state) => state.grid);
+    const dispatch = useDispatch();
 
 
     const changeGridColor = () => {

@@ -1,9 +1,9 @@
 import React from 'react';
-import { useAppSelector } from '../../store/hooks';
 import GridItems from './GridItems';
+import { useSelector } from 'react-redux';
 
 const Grid = () => {
-    const {pixelData } = useAppSelector((state) => state.grid);
+    const {pixelData } = useSelector((state) => state.grid);
     
     const renderGridItems = () => {
         let gridItems = [];

@@ -1,10 +1,10 @@
 import React from 'react';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { setSelectedColor } from './gridSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 const ColorPicker = () => {
-    const {colorOptions, selectedColor } = useAppSelector((state) => state.grid);
-    const dispatch = useAppDispatch();
+    const {colorOptions, selectedColor } = useSelector((state) => state.grid);
+    const dispatch = useDispatch();
 
     const handleColorSelection = (color) => {
         dispatch(setSelectedColor(color));

@@ -35,7 +35,7 @@ class Assets
     {
         
         // Enqueue plugin entry points
-        $handle = $this->enqueueScript('admin', 'admin.lite.js');
+        $handle = $this->enqueueScript('admin', 'admin.js', ['wp-element']);
         $this->enqueueStyle('admin', 'admin.css');
         // Localize script with server-side variables
         \wp_localize_script($handle, 'appLocalizer', [
@@ -144,7 +144,7 @@ class Assets
      */
     public function getPublicFolder()
     {
-        return 'public/dist/';
+        return 'build/';
     }
 
     /**

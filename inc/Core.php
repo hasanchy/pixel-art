@@ -56,10 +56,17 @@ class Core extends BaseCore {
 	{
 		$this->configPage = ConfigPage::instance();
 
+		// \add_action('init', array($this, 'create_block_wp_plugin_framework_block_init'));
         \add_action('rest_api_init', [Settings::instance(), 'rest_api_init']);
 		\add_action('admin_enqueue_scripts', [$this->getAssets(), 'admin_enqueue_scripts']);
 		\add_action('admin_menu', [$this->getConfigPage(), 'admin_menu']);
 		\add_filter('plugin_action_links_' . \plugin_basename(PIXELART_FILE), [$this->getConfigPage(), 'plugin_action_links'], 10, 2);
+	}
+
+	function create_block_wp_plugin_framework_block_init() {
+		register_block_type( PIXELART_PATH . '/public/dist', array(
+			'render_callback' => array($this, 'theHTML')
+		  ) );
 	}
 	
 	/**
