@@ -85,7 +85,7 @@ export const gridSlice = createSlice({
 		}),
 		builder.addCase(fetchPixelData.rejected, (state, action) => {
 			state.isPixelDataFetching = false;
-			let errorMessage = (action.payload?.message) ? action.payload.message : 'Pixel data fetching failed';
+			let errorMessage = (action.payload?.message) ? action.payload.message : 'Fetching pixel data failed.';
             state.alert = {
                 type: 'error',
                 message: errorMessage
@@ -103,12 +103,12 @@ export const gridSlice = createSlice({
             state.savedPixelData = state.pixelData
             state.alert = {
                 type: 'success',
-                message: 'Pixel data saved successfully!'
+                message: 'Pixel data has been saved successfully!'
             };
 		}),
 		builder.addCase(savePixelData.rejected, (state, action) => {
 			state.isPixelDataSaving = false;
-			let errorMessage = (action.payload?.message) ? action.payload.message : 'Pixel data saving failed';
+			let errorMessage = (action.payload?.message) ? action.payload.message : 'Saving pixel data failed';
             state.alert = {
                 type: 'error',
                 message: errorMessage

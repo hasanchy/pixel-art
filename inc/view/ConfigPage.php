@@ -27,7 +27,7 @@ class ConfigPage
      */
     public function admin_menu()
     {
-        \add_menu_page('Pixel Art - Amazon Product Importer', 'Pixel Art', 'manage_options', 'pixel-art', [$this, 'render_component_library'], 'dashicons-download', 100);
+        \add_menu_page('Pixel Art - Amazon Product Importer', 'Pixel Art', 'manage_options', 'pixel-art', [$this, 'render_component_library'], 'dashicons-grid-view', 100);
     }
 
     /**
