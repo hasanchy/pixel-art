@@ -17,7 +17,9 @@ const assignInitialPixels = () => {
 
 const initialState = {
 	pixels: assignInitialPixels(),
-    isMouseDown: false
+    isMouseDown: false,
+    colorOptions:[ 'red', 'green', 'blue', 'yellow', 'purple', 'orange', 'pink', 'teal', 'brown', 'gray', 'transparent' ],
+    selectedColor: 'red'
 }
 
 export const gridSlice = createSlice({
@@ -29,11 +31,14 @@ export const gridSlice = createSlice({
 		},
         setIsMouseDown: (state, action) => {
 			state.isMouseDown = action.payload;
+		},
+        setSelectedColor: (state, action) => {
+			state.selectedColor = action.payload;
 		}
 	},
 	extraReducers: (builder) => {
 	}
 })
 
-export const { setPixels, setIsMouseDown } = gridSlice.actions
+export const { setPixels, setIsMouseDown, setSelectedColor } = gridSlice.actions
 export default gridSlice.reducer;

@@ -11,83 +11,42 @@
 .grid-item {
   width: 20px;
   height: 20px;
+  cursor: pointer;
   border: 1px solid #ccc; /* Optional: to see the grid lines */
 }
 
-.pixelart-image-gallery {
+.pa-button {
+  width: 30px;
+  height: 30px;
+  border: 5px solid;
+  border-radius: 50%;
   display: inline-block;
-  border-radius: 5px;
-  padding: 10px;
-  margin: 5px;
-  background-color: #fdfdfd;
-  vertical-align: top;
-}
-
-.ant-statistic-title {
-  font-weight: 600;
-}
-
-.ant-statistic-content {
-  font-weight: 700 !important;
-  font-size: 30px !important;
-}
-
-.icon-box {
-  width: 60px;
-  height: 60px;
+  margin: 20px 10px;
   text-align: center;
-  background: #672fb4;
-  color: #fff;
-  border-radius: 0.5rem;
-  margin-left: auto;
-  line-height: 65px;
+  line-height: 50px;
+  color: white;
+  font-family: Arial, sans-serif;
+  cursor: pointer;
+  /* transition: all 0.3s ease; */
 }
 
-.ant-input {
-  min-height: 32px !important;
+.pa-button-transparent {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 20px 10px;
+  background: url("data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"10\" height=\"10\" viewBox=\"0 0 10 10\"><rect width=\"5\" height=\"5\" fill=\"%23ccc\"/><rect x=\"5\" width=\"5\" height=\"5\" fill=\"%23fff\"/><rect y=\"5\" width=\"5\" height=\"5\" fill=\"%23fff\"/><rect x=\"5\" y=\"5\" width=\"5\" height=\"5\" fill=\"%23ccc\"/></svg>") repeat;
+  border: 5px solid #fff;
+  cursor: pointer;
 }
 
-.ant-tabs-nav {
-  margin: 0 0 0px 0 !important;
+.pa-button:hover, .pa-button-transparent:hover {
+  border-color: rgba(0, 0, 0, 0.3215686275);
 }
 
-.pixelart-button-primary {
-  background: #674399 !important;
-  border-color: #674399 !important;
-}
-
-.pixelart-button-danger {
-  background: #c02929 !important;
-  border-color: #c02929 !important;
-}
-
-.pixelart-nav-tab-active {
-  border-radius: 4px 4px 0 0;
-  color: #53367c !important;
-}
-
-.pixelart-button {
-  color: #674399 !important;
-  border-color: #674399 !important;
-}
-
-.pixelart-product-categories {
-  min-height: 42px;
-  max-height: 200px;
-  width: 50%;
-  overflow: auto;
-  padding: 0 0.9em;
-  background-color: #fff;
-}
-
-.pixelart-product-categories ul {
-  list-style: none;
-  padding: 0;
-  margin: 14px 0;
-}
-
-.pixelart-product-categories ul ul {
-  margin: 10px 0 0 25px;
+.pa-button.selected, .pa-button-transparent.selected {
+  border-color: #000;
 }
 
 /*# sourceMappingURL=admin.css.map*/

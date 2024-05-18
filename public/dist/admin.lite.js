@@ -9249,6 +9249,31 @@ ansiHTML.reset()
 
 /***/ }),
 
+/***/ "./node_modules/antd/es/_util/gapSize.js":
+/*!***********************************************!*\
+  !*** ./node_modules/antd/es/_util/gapSize.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   isPresetSize: () => (/* binding */ isPresetSize),
+/* harmony export */   isValidGapNumber: () => (/* binding */ isValidGapNumber)
+/* harmony export */ });
+function isPresetSize(size) {
+  return ['small', 'middle', 'large'].includes(size);
+}
+function isValidGapNumber(size) {
+  if (!size) {
+    // The case of size = 0 is deliberately excluded here, because the default value of the gap attribute in CSS is 0, so if the user passes 0 in, we can directly ignore it.
+    return false;
+  }
+  return typeof size === 'number' && !Number.isNaN(size);
+}
+
+/***/ }),
+
 /***/ "./node_modules/antd/es/_util/motion.js":
 /*!**********************************************!*\
   !*** ./node_modules/antd/es/_util/motion.js ***!
@@ -11177,6 +11202,463 @@ const prepareComponentToken = token => {
   return [genBaseStyle(skeletonToken)];
 }, prepareComponentToken, {
   deprecatedTokens: [['color', 'gradientFromColor'], ['colorGradientEnd', 'gradientToColor']]
+}));
+
+/***/ }),
+
+/***/ "./node_modules/antd/es/space/Compact.js":
+/*!***********************************************!*\
+  !*** ./node_modules/antd/es/space/Compact.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   NoCompactStyle: () => (/* binding */ NoCompactStyle),
+/* harmony export */   SpaceCompactItemContext: () => (/* binding */ SpaceCompactItemContext),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   useCompactItemContext: () => (/* binding */ useCompactItemContext)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var rc_util_es_Children_toArray__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rc-util/es/Children/toArray */ "./node_modules/rc-util/es/Children/toArray.js");
+/* harmony import */ var _config_provider__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../config-provider */ "./node_modules/antd/es/config-provider/context.js");
+/* harmony import */ var _config_provider_hooks_useSize__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../config-provider/hooks/useSize */ "./node_modules/antd/es/config-provider/hooks/useSize.js");
+/* harmony import */ var _style__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./style */ "./node_modules/antd/es/space/style/index.js");
+"use client";
+
+var __rest = undefined && undefined.__rest || function (s, e) {
+  var t = {};
+  for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+    if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+  }
+  return t;
+};
+
+
+
+
+
+
+const SpaceCompactItemContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createContext(null);
+const useCompactItemContext = (prefixCls, direction) => {
+  const compactItemContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(SpaceCompactItemContext);
+  const compactItemClassnames = react__WEBPACK_IMPORTED_MODULE_0__.useMemo(() => {
+    if (!compactItemContext) {
+      return '';
+    }
+    const {
+      compactDirection,
+      isFirstItem,
+      isLastItem
+    } = compactItemContext;
+    const separator = compactDirection === 'vertical' ? '-vertical-' : '-';
+    return classnames__WEBPACK_IMPORTED_MODULE_1___default()(`${prefixCls}-compact${separator}item`, {
+      [`${prefixCls}-compact${separator}first-item`]: isFirstItem,
+      [`${prefixCls}-compact${separator}last-item`]: isLastItem,
+      [`${prefixCls}-compact${separator}item-rtl`]: direction === 'rtl'
+    });
+  }, [prefixCls, direction, compactItemContext]);
+  return {
+    compactSize: compactItemContext === null || compactItemContext === void 0 ? void 0 : compactItemContext.compactSize,
+    compactDirection: compactItemContext === null || compactItemContext === void 0 ? void 0 : compactItemContext.compactDirection,
+    compactItemClassnames
+  };
+};
+const NoCompactStyle = _ref => {
+  let {
+    children
+  } = _ref;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(SpaceCompactItemContext.Provider, {
+    value: null
+  }, children);
+};
+const CompactItem = _a => {
+  var {
+      children
+    } = _a,
+    otherProps = __rest(_a, ["children"]);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(SpaceCompactItemContext.Provider, {
+    value: otherProps
+  }, children);
+};
+const Compact = props => {
+  const {
+    getPrefixCls,
+    direction: directionConfig
+  } = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_config_provider__WEBPACK_IMPORTED_MODULE_3__.ConfigContext);
+  const {
+      size,
+      direction,
+      block,
+      prefixCls: customizePrefixCls,
+      className,
+      rootClassName,
+      children
+    } = props,
+    restProps = __rest(props, ["size", "direction", "block", "prefixCls", "className", "rootClassName", "children"]);
+  const mergedSize = (0,_config_provider_hooks_useSize__WEBPACK_IMPORTED_MODULE_4__["default"])(ctx => size !== null && size !== void 0 ? size : ctx);
+  const prefixCls = getPrefixCls('space-compact', customizePrefixCls);
+  const [wrapCSSVar, hashId] = (0,_style__WEBPACK_IMPORTED_MODULE_5__["default"])(prefixCls);
+  const clx = classnames__WEBPACK_IMPORTED_MODULE_1___default()(prefixCls, hashId, {
+    [`${prefixCls}-rtl`]: directionConfig === 'rtl',
+    [`${prefixCls}-block`]: block,
+    [`${prefixCls}-vertical`]: direction === 'vertical'
+  }, className, rootClassName);
+  const compactItemContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(SpaceCompactItemContext);
+  const childNodes = (0,rc_util_es_Children_toArray__WEBPACK_IMPORTED_MODULE_2__["default"])(children);
+  const nodes = react__WEBPACK_IMPORTED_MODULE_0__.useMemo(() => childNodes.map((child, i) => {
+    const key = child && child.key || `${prefixCls}-item-${i}`;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(CompactItem, {
+      key: key,
+      compactSize: mergedSize,
+      compactDirection: direction,
+      isFirstItem: i === 0 && (!compactItemContext || (compactItemContext === null || compactItemContext === void 0 ? void 0 : compactItemContext.isFirstItem)),
+      isLastItem: i === childNodes.length - 1 && (!compactItemContext || (compactItemContext === null || compactItemContext === void 0 ? void 0 : compactItemContext.isLastItem))
+    }, child);
+  }), [size, childNodes, compactItemContext]);
+  // =========================== Render ===========================
+  if (childNodes.length === 0) {
+    return null;
+  }
+  return wrapCSSVar( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", Object.assign({
+    className: clx
+  }, restProps), nodes));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Compact);
+
+/***/ }),
+
+/***/ "./node_modules/antd/es/space/Item.js":
+/*!********************************************!*\
+  !*** ./node_modules/antd/es/space/Item.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _context__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./context */ "./node_modules/antd/es/space/context.js");
+"use client";
+
+
+
+const Item = _ref => {
+  let {
+    className,
+    index,
+    children,
+    split,
+    style
+  } = _ref;
+  const {
+    latestIndex
+  } = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_context__WEBPACK_IMPORTED_MODULE_1__.SpaceContext);
+  if (children === null || children === undefined) {
+    return null;
+  }
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: className,
+    style: style
+  }, children), index < latestIndex && split && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+    className: `${className}-split`
+  }, split));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Item);
+
+/***/ }),
+
+/***/ "./node_modules/antd/es/space/context.js":
+/*!***********************************************!*\
+  !*** ./node_modules/antd/es/space/context.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   SpaceContext: () => (/* binding */ SpaceContext),
+/* harmony export */   SpaceContextProvider: () => (/* binding */ SpaceContextProvider)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+const SpaceContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createContext({
+  latestIndex: 0
+});
+const SpaceContextProvider = SpaceContext.Provider;
+
+/***/ }),
+
+/***/ "./node_modules/antd/es/space/index.js":
+/*!*********************************************!*\
+  !*** ./node_modules/antd/es/space/index.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   SpaceContext: () => (/* reexport safe */ _context__WEBPACK_IMPORTED_MODULE_3__.SpaceContext),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var rc_util_es_Children_toArray__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rc-util/es/Children/toArray */ "./node_modules/rc-util/es/Children/toArray.js");
+/* harmony import */ var _util_gapSize__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../_util/gapSize */ "./node_modules/antd/es/_util/gapSize.js");
+/* harmony import */ var _config_provider__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../config-provider */ "./node_modules/antd/es/config-provider/context.js");
+/* harmony import */ var _Compact__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Compact */ "./node_modules/antd/es/space/Compact.js");
+/* harmony import */ var _context__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./context */ "./node_modules/antd/es/space/context.js");
+/* harmony import */ var _Item__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Item */ "./node_modules/antd/es/space/Item.js");
+/* harmony import */ var _style__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./style */ "./node_modules/antd/es/space/style/index.js");
+"use client";
+
+var __rest = undefined && undefined.__rest || function (s, e) {
+  var t = {};
+  for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+    if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+  }
+  return t;
+};
+
+
+
+
+
+
+
+
+
+
+const InternalSpace = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef((props, ref) => {
+  var _a, _b;
+  const {
+    getPrefixCls,
+    space,
+    direction: directionConfig
+  } = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_config_provider__WEBPACK_IMPORTED_MODULE_4__.ConfigContext);
+  const {
+      size = (space === null || space === void 0 ? void 0 : space.size) || 'small',
+      align,
+      className,
+      rootClassName,
+      children,
+      direction = 'horizontal',
+      prefixCls: customizePrefixCls,
+      split,
+      style,
+      wrap = false,
+      classNames: customClassNames,
+      styles
+    } = props,
+    otherProps = __rest(props, ["size", "align", "className", "rootClassName", "children", "direction", "prefixCls", "split", "style", "wrap", "classNames", "styles"]);
+  const [horizontalSize, verticalSize] = Array.isArray(size) ? size : [size, size];
+  const isPresetVerticalSize = (0,_util_gapSize__WEBPACK_IMPORTED_MODULE_5__.isPresetSize)(verticalSize);
+  const isPresetHorizontalSize = (0,_util_gapSize__WEBPACK_IMPORTED_MODULE_5__.isPresetSize)(horizontalSize);
+  const isValidVerticalSize = (0,_util_gapSize__WEBPACK_IMPORTED_MODULE_5__.isValidGapNumber)(verticalSize);
+  const isValidHorizontalSize = (0,_util_gapSize__WEBPACK_IMPORTED_MODULE_5__.isValidGapNumber)(horizontalSize);
+  const childNodes = (0,rc_util_es_Children_toArray__WEBPACK_IMPORTED_MODULE_2__["default"])(children, {
+    keepEmpty: true
+  });
+  const mergedAlign = align === undefined && direction === 'horizontal' ? 'center' : align;
+  const prefixCls = getPrefixCls('space', customizePrefixCls);
+  const [wrapCSSVar, hashId, cssVarCls] = (0,_style__WEBPACK_IMPORTED_MODULE_6__["default"])(prefixCls);
+  const cls = classnames__WEBPACK_IMPORTED_MODULE_1___default()(prefixCls, space === null || space === void 0 ? void 0 : space.className, hashId, `${prefixCls}-${direction}`, {
+    [`${prefixCls}-rtl`]: directionConfig === 'rtl',
+    [`${prefixCls}-align-${mergedAlign}`]: mergedAlign,
+    [`${prefixCls}-gap-row-${verticalSize}`]: isPresetVerticalSize,
+    [`${prefixCls}-gap-col-${horizontalSize}`]: isPresetHorizontalSize
+  }, className, rootClassName, cssVarCls);
+  const itemClassName = classnames__WEBPACK_IMPORTED_MODULE_1___default()(`${prefixCls}-item`, (_a = customClassNames === null || customClassNames === void 0 ? void 0 : customClassNames.item) !== null && _a !== void 0 ? _a : (_b = space === null || space === void 0 ? void 0 : space.classNames) === null || _b === void 0 ? void 0 : _b.item);
+  // Calculate latest one
+  let latestIndex = 0;
+  const nodes = childNodes.map((child, i) => {
+    var _a, _b;
+    if (child !== null && child !== undefined) {
+      latestIndex = i;
+    }
+    const key = child && child.key || `${itemClassName}-${i}`;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Item__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      className: itemClassName,
+      key: key,
+      index: i,
+      split: split,
+      style: (_a = styles === null || styles === void 0 ? void 0 : styles.item) !== null && _a !== void 0 ? _a : (_b = space === null || space === void 0 ? void 0 : space.styles) === null || _b === void 0 ? void 0 : _b.item
+    }, child);
+  });
+  const spaceContext = react__WEBPACK_IMPORTED_MODULE_0__.useMemo(() => ({
+    latestIndex
+  }), [latestIndex]);
+  // =========================== Render ===========================
+  if (childNodes.length === 0) {
+    return null;
+  }
+  const gapStyle = {};
+  if (wrap) {
+    gapStyle.flexWrap = 'wrap';
+  }
+  if (!isPresetHorizontalSize && isValidHorizontalSize) {
+    gapStyle.columnGap = horizontalSize;
+  }
+  if (!isPresetVerticalSize && isValidVerticalSize) {
+    gapStyle.rowGap = verticalSize;
+  }
+  return wrapCSSVar( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", Object.assign({
+    ref: ref,
+    className: cls,
+    style: Object.assign(Object.assign(Object.assign({}, gapStyle), space === null || space === void 0 ? void 0 : space.style), style)
+  }, otherProps), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_context__WEBPACK_IMPORTED_MODULE_3__.SpaceContextProvider, {
+    value: spaceContext
+  }, nodes)));
+});
+const Space = InternalSpace;
+Space.Compact = _Compact__WEBPACK_IMPORTED_MODULE_8__["default"];
+if (true) {
+  Space.displayName = 'Space';
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Space);
+
+/***/ }),
+
+/***/ "./node_modules/antd/es/space/style/compact.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/antd/es/space/style/compact.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+const genSpaceCompactStyle = token => {
+  const {
+    componentCls
+  } = token;
+  return {
+    [componentCls]: {
+      '&-block': {
+        display: 'flex',
+        width: '100%'
+      },
+      '&-vertical': {
+        flexDirection: 'column'
+      }
+    }
+  };
+};
+// ============================== Export ==============================
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (genSpaceCompactStyle);
+
+/***/ }),
+
+/***/ "./node_modules/antd/es/space/style/index.js":
+/*!***************************************************!*\
+  !*** ./node_modules/antd/es/space/style/index.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   prepareComponentToken: () => (/* binding */ prepareComponentToken)
+/* harmony export */ });
+/* harmony import */ var _theme_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../theme/internal */ "./node_modules/antd/es/theme/util/genComponentStyleHook.js");
+/* harmony import */ var _theme_internal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../theme/internal */ "./node_modules/antd/es/theme/util/statistic.js");
+/* harmony import */ var _compact__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./compact */ "./node_modules/antd/es/space/style/compact.js");
+
+
+const genSpaceStyle = token => {
+  const {
+    componentCls,
+    antCls
+  } = token;
+  return {
+    [componentCls]: {
+      display: 'inline-flex',
+      '&-rtl': {
+        direction: 'rtl'
+      },
+      '&-vertical': {
+        flexDirection: 'column'
+      },
+      '&-align': {
+        flexDirection: 'column',
+        '&-center': {
+          alignItems: 'center'
+        },
+        '&-start': {
+          alignItems: 'flex-start'
+        },
+        '&-end': {
+          alignItems: 'flex-end'
+        },
+        '&-baseline': {
+          alignItems: 'baseline'
+        }
+      },
+      [`${componentCls}-item:empty`]: {
+        display: 'none'
+      },
+      // https://github.com/ant-design/ant-design/issues/47875
+      [`${componentCls}-item > ${antCls}-badge-not-a-wrapper:only-child`]: {
+        display: 'block'
+      }
+    }
+  };
+};
+const genSpaceGapStyle = token => {
+  const {
+    componentCls
+  } = token;
+  return {
+    [componentCls]: {
+      '&-gap-row-small': {
+        rowGap: token.spaceGapSmallSize
+      },
+      '&-gap-row-middle': {
+        rowGap: token.spaceGapMiddleSize
+      },
+      '&-gap-row-large': {
+        rowGap: token.spaceGapLargeSize
+      },
+      '&-gap-col-small': {
+        columnGap: token.spaceGapSmallSize
+      },
+      '&-gap-col-middle': {
+        columnGap: token.spaceGapMiddleSize
+      },
+      '&-gap-col-large': {
+        columnGap: token.spaceGapLargeSize
+      }
+    }
+  };
+};
+// ============================== Export ==============================
+const prepareComponentToken = () => ({});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_theme_internal__WEBPACK_IMPORTED_MODULE_0__.genStyleHooks)('Space', token => {
+  const spaceToken = (0,_theme_internal__WEBPACK_IMPORTED_MODULE_1__.merge)(token, {
+    spaceGapSmallSize: token.paddingXS,
+    spaceGapMiddleSize: token.padding,
+    spaceGapLargeSize: token.paddingLG
+  });
+  return [genSpaceStyle(spaceToken), genSpaceGapStyle(spaceToken), (0,_compact__WEBPACK_IMPORTED_MODULE_2__["default"])(spaceToken)];
+}, () => ({}), {
+  // Space component don't apply extra font style
+  // https://github.com/ant-design/ant-design/issues/40315
+  resetStyle: false
 }));
 
 /***/ }),
@@ -14456,9 +14938,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react_error_boundary__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-error-boundary */ "./node_modules/react-error-boundary/dist/react-error-boundary.development.esm.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/card/index.js");
+/* harmony import */ var react_error_boundary__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-error-boundary */ "./node_modules/react-error-boundary/dist/react-error-boundary.development.esm.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/card/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/space/index.js");
 /* harmony import */ var _grid_Grid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../grid/Grid */ "./src/public/dev/features/grid/Grid.tsx");
+/* harmony import */ var _grid_ColorPicker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../grid/ColorPicker */ "./src/public/dev/features/grid/ColorPicker.tsx");
+
 
 
 
@@ -14478,23 +14963,89 @@ var App = function App() {
           color: '#eda93a'
         },
         children: "Pixel"
-      }), " ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+      }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
         style: {
           color: '#674399'
         },
         children: "Art"
       })]
-    }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_error_boundary__WEBPACK_IMPORTED_MODULE_2__.ErrorBoundary, {
+    }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_error_boundary__WEBPACK_IMPORTED_MODULE_3__.ErrorBoundary, {
       fallback: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
         children: "Something went wrong"
       }),
-      children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(antd__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_grid_Grid__WEBPACK_IMPORTED_MODULE_1__["default"], {})
+      children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(antd__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          direction: "horizontal",
+          style: {
+            width: '100%',
+            justifyContent: 'center'
+          },
+          children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_grid_Grid__WEBPACK_IMPORTED_MODULE_1__["default"], {})
+        }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(antd__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          direction: "horizontal",
+          style: {
+            width: '100%',
+            justifyContent: 'center'
+          },
+          children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_grid_ColorPicker__WEBPACK_IMPORTED_MODULE_2__["default"], {})
+        })]
       })
     })]
   });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
+
+/***/ }),
+
+/***/ "./src/public/dev/features/grid/ColorPicker.tsx":
+/*!******************************************************!*\
+  !*** ./src/public/dev/features/grid/ColorPicker.tsx ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _store_hooks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../store/hooks */ "./src/public/dev/store/hooks.ts");
+/* harmony import */ var _gridSlice__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./gridSlice */ "./src/public/dev/features/grid/gridSlice.ts");
+var _this = undefined;
+
+
+
+var ColorPicker = function ColorPicker() {
+  var _useAppSelector = (0,_store_hooks__WEBPACK_IMPORTED_MODULE_1__.useAppSelector)(function (state) {
+      return state.grid;
+    }),
+    colorOptions = _useAppSelector.colorOptions,
+    selectedColor = _useAppSelector.selectedColor;
+  var dispatch = (0,_store_hooks__WEBPACK_IMPORTED_MODULE_1__.useAppDispatch)();
+  var handleColorSelection = function handleColorSelection(color) {
+    dispatch((0,_gridSlice__WEBPACK_IMPORTED_MODULE_2__.setSelectedColor)(color));
+  };
+  var renderColorButtons = function renderColorButtons() {
+    var buttonListHTML = [];
+    var buttonClass, selected;
+    colorOptions.forEach(function (color, i) {
+      buttonClass = color === 'transparent' ? 'pa-button-transparent' : 'pa-button';
+      selected = color === selectedColor ? ' selected' : '';
+      buttonListHTML.push((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+        className: "".concat(buttonClass).concat(selected),
+        style: {
+          backgroundColor: color
+        },
+        onClick: handleColorSelection.bind(_this, color)
+      }, i));
+    });
+    return buttonListHTML;
+  };
+  return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+    children: renderColorButtons()
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ColorPicker);
 
 /***/ }),
 
@@ -14567,11 +15118,12 @@ var GridItems = function GridItems(props) {
       return state.grid;
     }),
     pixels = _useAppSelector.pixels,
-    isMouseDown = _useAppSelector.isMouseDown;
+    isMouseDown = _useAppSelector.isMouseDown,
+    selectedColor = _useAppSelector.selectedColor;
   var dispatch = (0,_store_hooks__WEBPACK_IMPORTED_MODULE_1__.useAppDispatch)();
   var changeGridColor = function changeGridColor() {
     var pixelsState = _toConsumableArray(pixels);
-    pixelsState[props.index] = 'red';
+    pixelsState[props.index] = selectedColor;
     dispatch((0,_gridSlice__WEBPACK_IMPORTED_MODULE_2__.setPixels)(pixelsState));
   };
   var handleOnClick = function handleOnClick() {
@@ -14601,7 +15153,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
 /* harmony export */   gridSlice: () => (/* binding */ gridSlice),
 /* harmony export */   setIsMouseDown: () => (/* binding */ setIsMouseDown),
-/* harmony export */   setPixels: () => (/* binding */ setPixels)
+/* harmony export */   setPixels: () => (/* binding */ setPixels),
+/* harmony export */   setSelectedColor: () => (/* binding */ setSelectedColor)
 /* harmony export */ });
 /* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
 
@@ -14616,7 +15169,9 @@ var assignInitialPixels = function assignInitialPixels() {
 };
 var initialState = {
   pixels: assignInitialPixels(),
-  isMouseDown: false
+  isMouseDown: false,
+  colorOptions: ['red', 'green', 'blue', 'yellow', 'purple', 'orange', 'pink', 'teal', 'brown', 'gray', 'transparent'],
+  selectedColor: 'red'
 };
 var gridSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
   name: 'grid',
@@ -14627,13 +15182,17 @@ var gridSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
     },
     setIsMouseDown: function setIsMouseDown(state, action) {
       state.isMouseDown = action.payload;
+    },
+    setSelectedColor: function setSelectedColor(state, action) {
+      state.selectedColor = action.payload;
     }
   },
   extraReducers: function extraReducers(builder) {}
 });
 var _gridSlice$actions = gridSlice.actions,
   setPixels = _gridSlice$actions.setPixels,
-  setIsMouseDown = _gridSlice$actions.setIsMouseDown;
+  setIsMouseDown = _gridSlice$actions.setIsMouseDown,
+  setSelectedColor = _gridSlice$actions.setSelectedColor;
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (gridSlice.reducer);
 
@@ -15868,7 +16427,7 @@ __webpack_require__.r(__webpack_exports__);
     if(true) {
       (function() {
         var localsJsonString = undefined;
-        // 1716027040076
+        // 1716036177914
         var cssReload = __webpack_require__(/*! ../../../../node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js")(module.id, {});
         // only invalidate when locals change
         if (
@@ -68458,7 +69017,7 @@ function filter (array, pattern) {
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("8f932d452428f0cc7001")
+/******/ 		__webpack_require__.h = () => ("64ae00cc6d0af292e1b3")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
