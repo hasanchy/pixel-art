@@ -1,0 +1,98 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(16, 20px);
+    grid-template-rows: repeat(16, 20px);
+    gap: 0; /* No gap between grid items */
+}
+
+.grid-item {
+    width: 20px;
+    height: 20px;
+    // background-color: transparent;
+    border: 1px solid #ccc; /* Optional: to see the grid lines */
+}
+
+
+.pixelart-image-gallery{
+	display: inline-block;
+	// border: 1px solid #f0f0f0;
+	border-radius: 5px;
+	padding: 10px;
+	margin: 5px;
+	background-color: #fdfdfd;
+	vertical-align:top;
+}
+
+.ant-statistic-title {
+	font-weight: 600;
+}
+
+.ant-statistic-content{
+	font-weight: 700 !important;
+	font-size: 30px !important;
+}
+
+.icon-box{
+	width: 60px;
+    height: 60px;
+    text-align: center;
+    background: #672fb4;
+    color: #fff;
+    border-radius: .5rem;
+    margin-left: auto;
+    line-height: 65px;
+}
+
+.ant-input {
+	min-height: 32px !important;
+}
+
+.ant-tabs-nav {
+	margin: 0 0 0px 0 !important;
+}
+
+.pixelart-button-primary {
+	background: #674399 !important;
+	border-color: #674399 !important;
+}
+
+.pixelart-button-danger {
+	background: #c02929 !important;
+	border-color: #c02929 !important;
+}
+
+.pixelart-nav-tab-active {
+	border-radius: 4px 4px 0 0;
+	color: #53367c !important;
+}
+
+.pixelart-button {
+	color: #674399 !important;
+	border-color: #674399 !important;
+}
+
+// button:focus {
+// 	border-color: #764fad !important;
+// 	box-shadow: 0 0 0 1px #764fad !important;
+// 	/* Only visible in Windows High Contrast mode */
+// 	outline: 2px solid transparent;
+// }
+
+.pixelart-product-categories {
+	min-height: 42px;
+	max-height: 200px;
+	width: 50%;
+	overflow: auto;
+	padding: 0 0.9em;
+	background-color: #fff;
+}
+
+.pixelart-product-categories ul {
+	list-style: none;
+	padding: 0;
+	margin: 14px 0;
+}
+
+.pixelart-product-categories ul ul {
+	margin: 10px 0 0 25px;
+}

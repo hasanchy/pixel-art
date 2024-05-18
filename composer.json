@@ -1,0 +1,30 @@
+{
+    "description": "Test",
+    "license": "GPL-3.0-or-later",
+    "config": {
+        "sort-packages": true
+    },
+    "authors": [
+        {
+            "name": "Hasan Chowdhury"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^8"
+    },
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "PIXELART\\": [
+                "inc/"
+            ]
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PIXELART\\Test\\": [
+                "test/phpunit/"
+            ]
+        }
+    }
+}

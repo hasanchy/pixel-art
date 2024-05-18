@@ -1,0 +1,93 @@
+/*!********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/public/dev/style/admin.scss ***!
+  \********************************************************************************************************************************************************************************************************************************************************/
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(16, 20px);
+  grid-template-rows: repeat(16, 20px);
+  gap: 0; /* No gap between grid items */
+}
+
+.grid-item {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ccc; /* Optional: to see the grid lines */
+}
+
+.pixelart-image-gallery {
+  display: inline-block;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 5px;
+  background-color: #fdfdfd;
+  vertical-align: top;
+}
+
+.ant-statistic-title {
+  font-weight: 600;
+}
+
+.ant-statistic-content {
+  font-weight: 700 !important;
+  font-size: 30px !important;
+}
+
+.icon-box {
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  background: #672fb4;
+  color: #fff;
+  border-radius: 0.5rem;
+  margin-left: auto;
+  line-height: 65px;
+}
+
+.ant-input {
+  min-height: 32px !important;
+}
+
+.ant-tabs-nav {
+  margin: 0 0 0px 0 !important;
+}
+
+.pixelart-button-primary {
+  background: #674399 !important;
+  border-color: #674399 !important;
+}
+
+.pixelart-button-danger {
+  background: #c02929 !important;
+  border-color: #c02929 !important;
+}
+
+.pixelart-nav-tab-active {
+  border-radius: 4px 4px 0 0;
+  color: #53367c !important;
+}
+
+.pixelart-button {
+  color: #674399 !important;
+  border-color: #674399 !important;
+}
+
+.pixelart-product-categories {
+  min-height: 42px;
+  max-height: 200px;
+  width: 50%;
+  overflow: auto;
+  padding: 0 0.9em;
+  background-color: #fff;
+}
+
+.pixelart-product-categories ul {
+  list-style: none;
+  padding: 0;
+  margin: 14px 0;
+}
+
+.pixelart-product-categories ul ul {
+  margin: 10px 0 0 25px;
+}
+
+/*# sourceMappingURL=admin.css.map*/
