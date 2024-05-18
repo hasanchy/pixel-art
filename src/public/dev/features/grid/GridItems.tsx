@@ -3,12 +3,12 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { setIsMouseDown, setPixels } from './gridSlice';
 
 const GridItems = (props) => {
-    const {pixels, isMouseDown, selectedColor } = useAppSelector((state) => state.grid);
+    const {pixelData, isMouseDown, selectedColor } = useAppSelector((state) => state.grid);
     const dispatch = useAppDispatch();
 
 
     const changeGridColor = () => {
-        let pixelsState = [...pixels]
+        let pixelsState = [...pixelData]
         pixelsState[props.index] = selectedColor;
         dispatch(setPixels(pixelsState));
     }

@@ -1,17 +1,23 @@
 import { ErrorBoundary } from "react-error-boundary";
-import { Button, Card, Col, Row, Space } from 'antd';
+import { Alert, Button, Card, Col, Row, Space } from 'antd';
 import Grid from "../grid/Grid";
 import ColorPicker from "../grid/ColorPicker";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { savePixelData } from "../grid/gridSlice";
+import { fetchPixelData, savePixelData } from "../grid/gridSlice";
+import { useEffect } from "react";
 
 const App = (): JSX.Element => {
 	const dispatch = useAppDispatch();
 
-	const { pixels } = useAppSelector((state) => state.grid);
+	const { pixelData, savedPixelData, isPixelDataFetching, isPixelDataSaving, alert } = useAppSelector((state) => state.grid);
+	const buttonDisabled = (isPixelDataFetching || JSON.stringify(pixelData) === JSON.stringify(savedPixelData)) ? true : false;
+
+	useEffect(() => {
+		dispatch(fetchPixelData())
+	}, [])
 
 	const handlePixelDataSave = () => {
-		dispatch(savePixelData({data:pixels}));
+		dispatch(savePixelData({data:pixelData}));
 	}
 
 	return (
@@ -31,9 +37,16 @@ const App = (): JSX.Element => {
 					</Row>
 					<Row justify="center">
 						<Col>
-							<Button type="primary" disabled={false} loading={false} onClick={handlePixelDataSave}>Save</Button>
+							<Button type="primary" disabled={buttonDisabled} loading={isPixelDataSaving} onClick={handlePixelDataSave}>Save</Button>
 						</Col>
 					</Row>
+					{alert.type && alert.message &&
+						<Row justify="center">
+							<div direction="vertical" size="middle" style={{ marginTop: '20px' }}>
+								<Alert message={alert.message} type={alert.type} closable={true}/>
+							</div>
+						</Row>
+					}
 				</Card>
 			</ErrorBoundary>
 		</div>

@@ -3,12 +3,12 @@ import { useAppSelector } from '../../store/hooks';
 import GridItems from './GridItems';
 
 const Grid = () => {
-    const {pixels } = useAppSelector((state) => state.grid);
+    const {pixelData } = useAppSelector((state) => state.grid);
     
     const renderGridItems = () => {
         let gridItems = [];
 
-        pixels.forEach((color, index)=>{
+        pixelData.forEach((color, index)=>{
             gridItems.push(<GridItems index={index} color={color} key={index}/>)
         })
 

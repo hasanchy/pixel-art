@@ -40,7 +40,7 @@ class Settings
         $pixelart_pixel_data = get_option( 'pixelart_pixel_data' );
 
         $response = [
-            'pixelart_pixel_data' => unserialize( $pixelart_pixel_data )
+            'pixelart_pixel_data' => ($pixelart_pixel_data) ? unserialize( $pixelart_pixel_data ) : null
         ];
 
         return rest_ensure_response( $response );
@@ -51,7 +51,9 @@ class Settings
         if ( isset( $req['data'] ) ) {
 			$pixelart_pixel_data = serialize($req['data']);
 			update_option('pixelart_pixel_data', $pixelart_pixel_data );
-		}
+		}else{
+            return new WP_Error('rest_pixelart_api_settings', 'Pixel data is required', ['status' => 400]);
+        }
 
 		$response = [
             'Success' => "Settings saved successfully"
