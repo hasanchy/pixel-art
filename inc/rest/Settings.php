@@ -22,13 +22,13 @@ class Settings
      */
     public function rest_api_init()
     {
-        \register_rest_route( 'pixel-art/v1', '/settings', [
+        \register_rest_route( 'pixel-data/v1', '/settings', [
             'methods' => 'GET',
             'callback' => [ $this, 'get_settings' ],
             'permission_callback' => [ $this, 'permission_callback' ]
         ] );
 
-        \register_rest_route( 'pixel-art/v1', '/settings', [
+        \register_rest_route( 'pixel-data/v1', '/settings', [
             'methods' => 'POST',
             'callback' => [ $this, 'save_settings' ],
             'permission_callback' => [ $this, 'permission_callback' ]
@@ -37,40 +37,10 @@ class Settings
     }
 
     public function get_settings() {
-        $pixelart_amazon_access_key = get_option( 'pixelart_amazon_access_key' );
-        $pixelart_amazon_secret_key  = get_option( 'pixelart_amazon_secret_key' );
-		$pixelart_amazon_country_code  = get_option( 'pixelart_amazon_country_code' );
-		$pixelart_amazon_affiliate_id  = get_option( 'pixelart_amazon_affiliate_id' );
-        
-        $pixelart_settings_remote_image = get_option( 'pixelart_settings_remote_image' );
-        $pixelart_settings_product_price  = get_option( 'pixelart_settings_product_price' );
-		$pixelart_settings_product_description  = get_option( 'pixelart_settings_product_description' );
-		$pixelart_settings_product_attributes  = get_option( 'pixelart_settings_product_attributes' );
-
-        $pixelart_settings_auto_sync = get_option( 'pixelart_settings_auto_sync' );
-        $pixelart_settings_auto_sync_occurence  = get_option( 'pixelart_settings_auto_sync_occurence' );
-		$pixelart_settings_sync_product_name  = get_option( 'pixelart_settings_sync_product_name' );
-		$pixelart_settings_sync_product_price  = get_option( 'pixelart_settings_sync_product_price' );
-        $pixelart_settings_sync_product_thumbnail  = get_option( 'pixelart_settings_sync_product_thumbnail' );
-        $pixelart_settings_sync_product_description  = get_option( 'pixelart_settings_sync_product_description' );
-        $pixelart_settings_sync_product_attributes  = get_option( 'pixelart_settings_sync_product_attributes' );
+        $pixelart_pixel_data = get_option( 'pixelart_pixel_data' );
 
         $response = [
-            'pixelart_amazon_access_key' => $pixelart_amazon_access_key ? $pixelart_amazon_access_key : "",
-            'pixelart_amazon_secret_key'  => $pixelart_amazon_secret_key ? $pixelart_amazon_secret_key : "",
-			'pixelart_amazon_country_code' => $pixelart_amazon_country_code ? $pixelart_amazon_country_code : "us",
-			'pixelart_amazon_affiliate_id' => $pixelart_amazon_affiliate_id ? $pixelart_amazon_affiliate_id : "",
-            'remote_image' => isset($pixelart_settings_remote_image) ? $pixelart_settings_remote_image : "No",
-            'product_price'  => isset($pixelart_settings_product_price) ? (int)$pixelart_settings_product_price : 0,
-			'product_description' => isset($pixelart_settings_product_description) ? (int)$pixelart_settings_product_description : 0,
-			'product_attributes' => isset($pixelart_settings_product_attributes) ? (int)$pixelart_settings_product_attributes : 0,
-            'auto_sync' => isset($pixelart_settings_auto_sync) ? $pixelart_settings_auto_sync : 'on',
-            'auto_sync_occurence' => isset($pixelart_settings_auto_sync_occurence) ? $pixelart_settings_auto_sync_occurence : 'everyday',
-            'sync_product_name' => isset($pixelart_settings_sync_product_name) ? (int)$pixelart_settings_sync_product_name : 1,
-            'sync_product_price' => isset($pixelart_settings_sync_product_price) ? (int)$pixelart_settings_sync_product_price : 1,
-            'sync_product_thumbnail' => isset($pixelart_settings_sync_product_thumbnail) ? (int)$pixelart_settings_sync_product_thumbnail : 1,
-            'sync_product_description' => isset($pixelart_settings_sync_product_description) ? (int)$pixelart_settings_sync_product_description : 1,
-            'sync_product_attributes' => isset($pixelart_settings_sync_product_attributes) ? (int)$pixelart_settings_sync_product_attributes : 1
+            'pixelart_pixel_data' => unserialize( $pixelart_pixel_data )
         ];
 
         return rest_ensure_response( $response );
@@ -78,16 +48,9 @@ class Settings
 
     public function save_settings($req) {
 
-        if ( isset( $req['pixelart_amazon_access_key'] ) ) {
-			$pixelart_amazon_access_key = sanitize_text_field( $req['pixelart_amazon_access_key'] );
-			$pixelart_amazon_secret_key = sanitize_text_field( $req['pixelart_amazon_secret_key'] );
-			$pixelart_amazon_country_code = sanitize_text_field( $req['pixelart_amazon_country_code'] );
-			$pixelart_amazon_affiliate_id = sanitize_text_field( $req['pixelart_amazon_affiliate_id'] );
-
-			update_option('pixelart_amazon_access_key', $pixelart_amazon_access_key );
-			update_option('pixelart_amazon_secret_key', $pixelart_amazon_secret_key );
-			update_option('pixelart_amazon_country_code', $pixelart_amazon_country_code );
-			update_option('pixelart_amazon_affiliate_id', $pixelart_amazon_affiliate_id );
+        if ( isset( $req['data'] ) ) {
+			$pixelart_pixel_data = serialize($req['data']);
+			update_option('pixelart_pixel_data', $pixelart_pixel_data );
 		}
 
 		$response = [

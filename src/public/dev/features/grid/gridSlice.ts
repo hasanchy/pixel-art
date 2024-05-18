@@ -6,8 +6,6 @@ import appLocalizer from '../../types/global';
 // Define the initial state using that type
 
 const assignInitialPixels = () => {
-    console.log('initial');
-    
     let pixels = []
     for(let i = 0; i< 256; i++){
         pixels.push('');
@@ -21,6 +19,21 @@ const initialState = {
     colorOptions:[ 'red', 'green', 'blue', 'yellow', 'purple', 'orange', 'pink', 'teal', 'brown', 'gray', 'transparent' ],
     selectedColor: 'red'
 }
+
+export const savePixelData = createAsyncThunk('settings/savePixelData', async (data, {rejectWithValue}) => {
+	const settingsURL = `${appLocalizer.restUrl}/pixel-data/v1/settings`;
+	try{
+		const res = await axios.post(settingsURL, data, {
+			headers: {
+				'content-type': 'application/json',
+				'X-WP-NONCE': appLocalizer.restNonce
+			}
+		});
+		return res.data;
+	} catch (error) {
+		return rejectWithValue(error.response.data);
+	}
+});
 
 export const gridSlice = createSlice({
 	name: 'grid',
