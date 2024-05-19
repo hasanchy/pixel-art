@@ -11,7 +11,8 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { useBlockProps } from '@wordpress/block-editor';
+import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
+import { PanelBody, RangeControl } from '@wordpress/components';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -29,12 +30,22 @@ import './editor.scss';
  *
  * @return {Element} Element to render.
  */
-export default function Edit() {
-	const blockProps = useBlockProps();
+
+export default function Edit(props) {
+  const { attributes: { size }, setAttributes } = props;
+
+	const blockProps = useBlockProps({
+    className: 'pixel-art-block',
+    style: { fontSize: size + 'px', lineHeight: '1' }
+});
+
+const onChangeSize = (newSize) => {
+    setAttributes({ size: newSize });
+};
 
 	const svg = (
-		<svg width="128" height="128" xmlns="http://www.w3.org/2000/svg">
-  <rect width="32" height="32" x="0" y="0" fill="red" />
+		<svg width={size} height={size} xmlns="http://www.w3.org/2000/svg">
+  <rect width="16" height="16" x="0" y="0" fill="red" />
   <rect width="32" height="32" x="32" y="0" fill="gold" />
   <rect width="32" height="32" x="64" y="0" fill="red" />
   <rect width="32" height="32" x="96" y="0" fill="#000" />
@@ -55,8 +66,22 @@ export default function Edit() {
 	);
 
 	return (
-		<div {...blockProps}>
-			{svg}
-		</div>
+    <>
+      <InspectorControls>
+        <PanelBody title={__('Pixel Art Settings', 'pixel-art-block')}>
+          <RangeControl
+            label={__('Size', 'pixel-art-block')}
+            value={size}
+            onChange={onChangeSize}
+            min={128}
+            max={200}
+          />
+        </PanelBody>
+      </InspectorControls>
+      <div {...blockProps}>
+        Here
+        {svg}
+      </div>
+    </>
 	);
 }
