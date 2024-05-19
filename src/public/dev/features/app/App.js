@@ -2,7 +2,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import { Alert, Button, Card, Col, Row, Space } from 'antd';
 import Grid from "../grid/Grid";
 import ColorPicker from "../grid/ColorPicker";
-import { fetchPixelData, savePixelData } from "../grid/gridSlice";
+import { fetchPixelData, resetPixels, savePixelData } from "../grid/gridSlice";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -15,6 +15,10 @@ const App = () => {
 	useEffect(() => {
 		dispatch(fetchPixelData())
 	}, [])
+
+	const handlePixelDataReset = () => {
+		dispatch(resetPixels());
+	}
 
 	const handlePixelDataSave = () => {
 		dispatch(savePixelData({data:pixelData}));
@@ -37,7 +41,10 @@ const App = () => {
 					</Row>
 					<Row justify="center">
 						<Col>
-							<Button type="primary" disabled={buttonDisabled} loading={isPixelDataSaving} onClick={handlePixelDataSave}>Save</Button>
+							<Space size="middle">
+								<Button type="default" disabled={isPixelDataFetching} onClick={handlePixelDataReset}>Reset</Button>
+								<Button type="primary" disabled={buttonDisabled} loading={isPixelDataSaving} onClick={handlePixelDataSave}>Save</Button>
+							</Space>
 						</Col>
 					</Row>
 					{alert.type && alert.message &&

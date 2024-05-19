@@ -1,9 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-// import appLocalizer from '../../types/global';
-import { message } from 'antd';
-
-// Define the initial state using that type
 
 const initializePixel = () => {
     let pixels = []
@@ -64,6 +60,9 @@ export const gridSlice = createSlice({
         setPixels: (state, action) => {
 			state.pixelData = action.payload;
 		},
+        resetPixels: (state, action) => {
+			state.pixelData = initializePixel();
+		},
         setIsMouseDown: (state, action) => {
 			state.isMouseDown = action.payload;
 		},
@@ -116,5 +115,5 @@ export const gridSlice = createSlice({
 	}
 })
 
-export const { setPixels, setIsMouseDown, setSelectedColor } = gridSlice.actions
+export const { setPixels, resetPixels, setIsMouseDown, setSelectedColor } = gridSlice.actions
 export default gridSlice.reducer;

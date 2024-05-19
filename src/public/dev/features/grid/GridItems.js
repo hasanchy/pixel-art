@@ -1,5 +1,5 @@
 import React from 'react';
-import { setIsMouseDown, setPixels } from './gridSlice';
+import { setPixels } from './gridSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 const GridItems = (props) => {
@@ -8,16 +8,25 @@ const GridItems = (props) => {
 
 
     const changeGridColor = () => {
-        let pixelsState = [...pixelData]
-        pixelsState[props.index] = selectedColor;
-        dispatch(setPixels(pixelsState));
+        if(pixelData[props.index] !== selectedColor){
+            let pixelsState = [...pixelData]
+            pixelsState[props.index] = selectedColor;
+            dispatch(setPixels(pixelsState));
+        }
     }
-    const handleOnClick = () => {
+
+    const handleMouseMove = () => {
+        if(isMouseDown){
+            changeGridColor()
+        }
+    }
+
+    const handleMouseDown = () => {
         changeGridColor()
     }
     
     return (
-        <div key={props.index} className="grid-item" style={{backgroundColor:props.color}} onClick={handleOnClick}/>
+        <div draggable="false" key={props.index} className="grid-item" style={{backgroundColor:props.color}} onMouseMove={handleMouseMove} onMouseDown={handleMouseDown}/>
     )
 }
 
