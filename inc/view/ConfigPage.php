@@ -2,9 +2,6 @@
 
 namespace PIXELART\view;
 
-use PIXELART\base\UtilsProvider;
-use PIXELART\Core;
-
 \defined('ABSPATH') or die('No direct access allowed!');
 // Avoid direct file request
 /**
@@ -12,7 +9,6 @@ use PIXELART\Core;
  */
 class ConfigPage
 {
-    use UtilsProvider;
     const COMPONENT_ID = PIXELART_SLUG . '-component';
 
     /**
@@ -65,4 +61,42 @@ class ConfigPage
     {
         return new \PIXELART\view\ConfigPage();
     }
+
+    public function create_pixel_art_block_init() 
+    {
+		register_block_type( PIXELART_PATH . '/build', array(
+			'render_callback' => array($this, 'theHTML')
+		) );
+	}
+
+    public function theHTML($attributes) {
+		$pixelart_pixel_data = get_option( 'pixelart_pixel_data' );
+        $pixel_data = ($pixelart_pixel_data) ? unserialize( $pixelart_pixel_data ) : [];
+        $aspect_ratio = 320;
+        $grid_size = $aspect_ratio /16;
+        $rect = '';
+        $x = 0;
+        $y = 0;
+        for($i=0; $i<count($pixel_data); $i++){
+
+            $rect .= '<rect width="'.$grid_size.'" height="'.$grid_size.'" x="'.$x.'" y="'.$y.'" fill="'.$pixel_data[$i].'" />';
+            
+            if( ($i+1)%16 === 0 ){
+                $x = 0;
+                $y += $grid_size; 
+            }else{
+                $x += $grid_size; 
+            }
+
+        }
+		$svg = '<svg width="'.$aspect_ratio.'" height="'.$aspect_ratio.'" xmlns="http://www.w3.org/2000/svg">
+        '.$rect.'
+            Sorry, your browser does not support inline SVG.  
+        </svg>';
+	
+		return sprintf(
+			'<div>%s</div>',
+			$svg
+		);
+	}
 }

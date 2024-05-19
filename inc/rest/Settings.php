@@ -82,9 +82,6 @@ class Settings
         if (!\current_user_can($cap)) {
             return new WP_Error('rest_pixelart_forbidden', \__('Forbidden'), ['status' => 403]);
         }
-        if (!\pixelart_is_plugin_active()) {
-            return new WP_Error('rest_pixelart_not_activated', \__('Pixel Art plugin is not active for the current user.', 'pixel-art'), ['status' => 500]);
-        }
         return null;
     }
 
