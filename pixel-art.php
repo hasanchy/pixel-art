@@ -4,9 +4,9 @@
  * 
  * @wordpress-plugin
  * Plugin Name:     Pixel Art
- * Description:     Efficiently fetch WooCommerce products in just a few clicks
- * Author:          ThemeDyno
- * Author URI:      https://themedyno.com/
+ * Description:     A WordPress plugin that allows users to draw and display pixel art on their website.
+ * Author:          Hasan Chowdhury
+ * Author URI:      https://github.com/hasanchy
  * Version:         1.0.0
  * Text Domain:     pixel-art
  * Domain Path:	    /languages
