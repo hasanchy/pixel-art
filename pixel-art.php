@@ -33,9 +33,6 @@ define('PIXELART_INC', PIXELART_PATH . '/inc/');
 define('PIXELART_MIN_PHP', '7.2.0'); // Minimum of PHP 7.2 required for autoloading and namespacing
 define('PIXELART_MIN_WP', '5.2.0'); // Minimum of WordPress 5.0 required
 define('PIXELART_NS', 'PIXELART');
-define('PIXELART_IS_PRO', false);
-define('PIXELART_SLUG_LITE', 'pixelart');
-define('PIXELART_SLUG_PRO', 'pixelart-pro');
 
 // Check PHP Version and print notice if minimum not reached, otherwise start the plugin core
 require_once PIXELART_INC .
