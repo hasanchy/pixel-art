@@ -10,3 +10,4 @@ Runs the app in the development mode.
 
 ### `npm run build`
 Compiles and bundles the source code of a project into a production-ready version.
+
